@@ -7,7 +7,7 @@ class Program
     {
         while (true)
         {
-            Console.WriteLine("File Finder");
+            Console.WriteLine("=== File Finder ===");
             Console.WriteLine("1. Search files by name");
             Console.WriteLine("2. Search text inside files");
             Console.WriteLine("3. Exit");
@@ -31,7 +31,7 @@ class Program
             }
             else
             {
-                Console.WriteLine("Invalid option.\n");
+                Console.WriteLine("Invalid option. Please try again.\n");
             }
         }
     }
@@ -64,7 +64,14 @@ class Program
                 }
             }
 
-            Console.WriteLine($"\nFound files: {count}\n");
+            if (count == 0)
+            {
+                Console.WriteLine("\nNo matching files found.\n");
+            }
+            else
+            {
+                Console.WriteLine($"\nFound files: {count}\n");
+            }
         }
         catch (Exception ex)
         {
@@ -107,7 +114,14 @@ class Program
                 }
             }
 
-            Console.WriteLine($"\nFiles containing the text: {count}\n");
+            if (count == 0)
+            {
+                Console.WriteLine("\nNo files containing the text were found.\n");
+            }
+            else
+            {
+                Console.WriteLine($"\nFiles containing the text: {count}\n");
+            }
         }
         catch (Exception ex)
         {
