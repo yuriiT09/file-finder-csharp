@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 class Program
 {
@@ -17,7 +18,7 @@ class Program
 
             if (choice == "1")
             {
-                Console.WriteLine("File search will be added here.\n");
+                SearchFilesByName();
             }
             else if (choice == "2")
             {
@@ -32,6 +33,42 @@ class Program
             {
                 Console.WriteLine("Invalid option.\n");
             }
+        }
+    }
+
+    static void SearchFilesByName()
+    {
+        Console.Write("Enter folder path: ");
+        string folderPath = Console.ReadLine();
+
+        if (!Directory.Exists(folderPath))
+        {
+            Console.WriteLine("Folder does not exist.\n");
+            return;
+        }
+
+        Console.Write("Enter file name or part of file name: ");
+        string searchText = Console.ReadLine();
+
+        try
+        {
+            string[] files = Directory.GetFiles(folderPath, "*", SearchOption.AllDirectories);
+            int count = 0;
+
+            foreach (string file in files)
+            {
+                if (Path.GetFileName(file).Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                {
+                    Console.WriteLine(file);
+                    count++;
+                }
+            }
+
+            Console.WriteLine($"\nFound files: {count}\n");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error: " + ex.Message + "\n");
         }
     }
 }
