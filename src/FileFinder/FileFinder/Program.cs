@@ -22,7 +22,7 @@ class Program
             }
             else if (choice == "2")
             {
-                Console.WriteLine("Text search will be added here.\n");
+                SearchTextInFiles();
             }
             else if (choice == "3")
             {
@@ -65,6 +65,49 @@ class Program
             }
 
             Console.WriteLine($"\nFound files: {count}\n");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error: " + ex.Message + "\n");
+        }
+    }
+
+    static void SearchTextInFiles()
+    {
+        Console.Write("Enter folder path: ");
+        string folderPath = Console.ReadLine();
+
+        if (!Directory.Exists(folderPath))
+        {
+            Console.WriteLine("Folder does not exist.\n");
+            return;
+        }
+
+        Console.Write("Enter text to search inside files: ");
+        string searchText = Console.ReadLine();
+
+        try
+        {
+            string[] files = Directory.GetFiles(folderPath, "*", SearchOption.AllDirectories);
+            int count = 0;
+
+            foreach (string file in files)
+            {
+                try
+                {
+                    string content = File.ReadAllText(file);
+                    if (content.Contains(searchText, StringComparison.OrdinalIgnoreCase))
+                    {
+                        Console.WriteLine(file);
+                        count++;
+                    }
+                }
+                catch
+                {
+                }
+            }
+
+            Console.WriteLine($"\nFiles containing the text: {count}\n");
         }
         catch (Exception ex)
         {
