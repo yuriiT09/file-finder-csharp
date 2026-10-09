@@ -1,32 +1,24 @@
-# File Finder C#
+# File Finder
 
-File Finder C# is a simple console application for working with files and folders. The program allows the user to search files by name and search text inside files in a selected directory.
+A C# command-line utility for searching a directory and its subfolders. Search by filename or find files containing a piece of text.
 
-## Features
-- Search files by name
-- Search text inside files
-- Work with folders and subfolders
-- Display full paths of found files
-- Show the number of found files
+## Run locally
 
-## Project Structure
-- README.md
-- .gitignore
-- src/FileFinder
+Install the .NET 9 SDK, then run:
 
-## Technologies
-- C#
-- .NET
-- Git
-- GitHub
+```bash
+dotnet run --project src/FileFinder/FileFinder/FileFinder.csproj
+```
 
-## How to Run
-1. Open the project in Visual Studio
-2. Run the program
-3. Choose one of the menu options
-4. Enter the folder path
-5. Enter the file name or text to search
+Select filename search or text search and enter an existing folder path. Matches are printed using their full paths.
 
-## Example
-Option 1 searches files by name in all subfolders.  
-Option 2 searches text inside files in all subfolders.
+## Details
+
+- Searches subdirectories recursively
+- Matches filenames and text without case sensitivity
+- Shows the number of matching files
+- Skips files it cannot read during text search
+
+## Notes
+
+This utility reads local files only; it does not change them. Very large directories can take time because files are scanned in one pass.
